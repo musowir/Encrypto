@@ -1,4 +1,14 @@
 # Encrypto
+This is a Python Flask web application that allows users to encrypt and decrypt files using Fernet encryption from the cryptography library. The app has two main routes: /encrypt and /decrypt.
+
+The /encrypt route allows users to upload a file, encrypt it using a randomly generated key, and then download the encrypted file along with the key as a zip file. The app first checks if the file is valid and saves it to the server's uploads folder. It then generates a random key and uses it to encrypt the uploaded file. The encrypted file and key are then zipped and sent to the user for download.
+
+The /decrypt route allows users to upload an encrypted file and its corresponding key, decrypt the file, and then download the decrypted file. The app first checks if both files are valid and saves them to the server's uploads folder. It then loads the key from the key file and uses it to decrypt the uploaded file. The decrypted file is then saved to the server's downloads folder and sent to the user for download.
+
+The app also includes a /clear route that allows users to clear the server's uploads and downloads folders.
+
+
+
 
 ## Getting Started
 ### Prerequisites
