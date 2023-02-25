@@ -38,19 +38,28 @@ def encrypt_file():
     file = request.files['file']
     if file.filename == '':
         return "No file selected"
+    # Check if the file type is allowed
     if file and allowed_file(file.filename):
+        # Secure the filename
         filename = secure_filename(file.filename)
+        # Save the file to the upload folder
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
+        # Generate a new encryption key and save it to a file named 'key.key'
         key = Fernet.generate_key()
         with open('key.key', 'wb') as key_file:
             key_file.write(key)
+        # Create a Fernet instance with the generated key
         fernet = Fernet(key)
+        # Read the contents of the original file
         with open(filepath, 'rb') as original_file:
             original = original_file.read()
+        # Encrypt the file contents
         encrypted = fernet.encrypt(original)
+        # Save the encrypted file to a file named after the original file
         with open(filename, 'wb') as encrypted_file:
             encrypted_file.write(encrypted)
+        # Create a zip file containing the encrypted file and the encryption key
         filen = filename.split(".")[0]    
         zip_path = os.path.join(app.config['UPLOAD_FOLDER'], filen + '.zip')
         with ZipFile(zip_path, 'w') as zip_file:
@@ -58,7 +67,7 @@ def encrypt_file():
             zip_file.write('key.key')
         zip_file.close()
 
-        
+        # Remove the original file, the encrypted file, and the encryption key
         os.remove(filename)
         os.remove(filepath)
         os.remove('key.key')
@@ -68,6 +77,7 @@ def encrypt_file():
         
         return response
     else:
+        # If the file type is not allowed, redirect to the home page
         return render_template('index.html')
 
 
