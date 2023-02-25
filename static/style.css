@@ -1,0 +1,122 @@
+/* Center the container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Add header styles */
+header {
+  background-color: #4299e1;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* Style the form input fields */
+input[type="file"] {
+  border: 2px solid #e2e8f0;
+  background-color: white;
+  color: #4a5568;
+  padding: 0.5rem;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+input[type="file"]:hover,
+input[type="file"]:focus {
+  border-color: #4299e1;
+  outline: none;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #4299e1;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 15px;
+  transition: all 0.2s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover,
+input[type="file"]::file-selector-button:focus {
+  background-color: #2c5282;
+  outline: none;
+}
+
+/* Style the form submit buttons */
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+button[type="submit"] {
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Style the download links */
+a.download-link {
+  display: inline-block;
+  background-color: #2ecc71;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+/* Style the clear button */
+button[type="button"] {
+  background-color: #e74c3c;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Style the flash message */
+ul.flash-message {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.flash-message li {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Add hover effect to buttons */
+button:hover,
+a:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  /* Add additional styles here */
+}
+
+button.bg-red-500:hover,
+a.bg-red-500:hover {
+  background-color: #c53030;
+  /* Add additional styles here */
+}

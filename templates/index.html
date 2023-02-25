@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+
+      <!-- Tailwind CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
+      <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
+      <title>Encrypto</title>
+   </head>
+   <body class="bg-gray-100">
+    <header class="bg-blue-100 p-4">
+        <h1 class="text-3xl font-bold text-center text-blue-500 py-5">Encrypto</h1>
+     </header>
+      <div class="container mx-auto p-4">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white rounded-lg p-4 text-center">
+               <h1 class="text-xl font-bold mb-2">File Encryption</h1>
+               <form action="{{ url_for('encrypt_file') }}" method="post" enctype="multipart/form-data">
+                  <div class="mb-4">
+                     <label for="file" class="block text-gray-700 font-bold mb-2">Select file to encrypt:</label>
+                     <input type="file" class="border rounded w-full py-2 px-3" name="file" required>
+                  </div>
+                  <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 mx-auto rounded">Encrypt</button>
+               </form>
+            </div>
+            <div class="bg-white rounded-lg p-4">
+               <h1 class="text-xl font-bold mb-2">File Decryption</h1>
+               <form action="{{ url_for('decrypt_file') }}" method="post" enctype="multipart/form-data">
+                  <div class="mb-4">
+                     <label for="file" class="block text-gray-700 font-bold mb-2">Select file to decrypt:</label>
+                     <input type="file" class="border rounded w-full py-2 px-3" name="file" required>
+                  </div>
+                  <div class="mb-4">
+                     <label for="key" class="block text-gray-700 font-bold mb-2">Upload .key file:</label>
+                     <input type="file" class="border rounded w-full py-2 px-3" name="key">
+                  </div>
+                  <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Decrypt</button>
+               </form>
+            </div>
+         </div>
+
+         {% if encrypted_file %}
+            <hr class="my-8">
+            <h2 class="text-xl font-bold mb-2">Encrypted file</h2>
+            <a href="{{ url_for('download_file', filename=encrypted_file) }}" class="bg-green-500 text-white font-bold py-2 px-4 rounded mr-2">Download encrypted file</a>
+            {% if key_file %}
+               <a href="{{ url_for('download_file', filename=key_file) }}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Download key</a>
+            {% endif %}
+         {% endif %}
+
+         {% if decrypted_file %}
+  <div class="my-10">
+    <h2 class="text-3xl font-bold mb-5">Decrypted file</h2>
+    <a href="{{ url_for('download_file', filename=decrypted_file) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download decrypted file</a>
+  </div>
+{% endif %}
+
+<form method="GET" action="/clear" class="my-10">
+  <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear Folders</button>
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="my-10">
+      {% for message in messages %}
+        <li class="text-red-500 font-bold">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+
+</body>
+</html>
