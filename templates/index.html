@@ -44,15 +44,15 @@
          </div>
 
          {% if encrypted_file %}
-            <hr class="my-8">
-            <h2 class="text-xl font-bold mb-2">Encrypted file</h2>
-            <a href="{{ url_for('download_file', filename=encrypted_file) }}" class="bg-green-500 text-white font-bold py-2 px-4 rounded mr-2">Download encrypted file</a>
-            {% if key_file %}
-               <a href="{{ url_for('download_file', filename=key_file) }}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Download key</a>
-            {% endif %}
-         {% endif %}
+    <hr class="my-8">
+    <h2 class="text-xl font-bold mb-2">Encrypted file</h2>
+    <a href="{{ url_for('download_file', filename=encrypted_file) }}" class="bg-green-500 text-white font-bold py-2 px-4 rounded mr-2">Download encrypted file</a>
+    {% if key_file %}
+       <a href="{{ url_for('download_file', filename=key_file) }}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Download key</a>
+    {% endif %}
+{% endif %}
 
-         {% if decrypted_file %}
+{% if decrypted_file %}
   <div class="my-10">
     <h2 class="text-3xl font-bold mb-5">Decrypted file</h2>
     <a href="{{ url_for('download_file', filename=decrypted_file) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download decrypted file</a>
@@ -77,5 +77,4 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
 
-</body>
-</html>
+</div></body></html>
