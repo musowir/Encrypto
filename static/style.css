@@ -1,122 +1,116 @@
-/* Center the container */
-.container {
-  max-width: 800px;
+  /* Style for the header */
+  header {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+ }
+ 
+ /* Style for the buttons */
+ button {
+    transition: all 0.3s ease-in-out;
+ }
+ 
+ button:hover {
+    transform: scale(1.05);
+ }
+ 
+ /* Style for the messages */
+ .message {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+ }
+ 
+ .message-text {
+    animation: fadeIn 0.5s ease-in-out;
+ }
+ 
+ @keyframes fadeIn {
+    from {
+       opacity: 0;
+    }
+    to {
+       opacity: 1;
+    }
+ }
+
+/* Center buttons */
+
+button {
+  display: block;
   margin: 0 auto;
 }
 
-/* Add header styles */
-header {
-  background-color: #4299e1;
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
-}
-
-header h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-header p {
-  font-size: 1.2rem;
-  margin: 0;
-}
-
-/* Style the form input fields */
-input[type="file"] {
-  border: 2px solid #e2e8f0;
-  background-color: white;
-  color: #4a5568;
-  padding: 0.5rem;
-  border-radius: 15px;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-input[type="file"]:hover,
-input[type="file"]:focus {
-  border-color: #4299e1;
-  outline: none;
-}
-
-input[type="file"]::file-selector-button {
-  background-color: #4299e1;
+/* Add animation and style to buttons */
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
   color: white;
-  padding: 0.5rem;
-  border-radius: 15px;
-  transition: all 0.2s ease-in-out;
-}
-
-input[type="file"]::file-selector-button:hover,
-input[type="file"]::file-selector-button:focus {
-  background-color: #2c5282;
-  outline: none;
-}
-
-/* Style the form submit buttons */
-.button-container {
-  display: flex;
-  justify-content: center;
-}
-
-button[type="submit"] {
-  background-color: #3498db;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-/* Style the download links */
-a.download-link {
-  display: inline-block;
-  background-color: #2ecc71;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  padding: 15px 32px;
+  text-align: center;
   text-decoration: none;
-}
-
-/* Style the clear button */
-button[type="button"] {
-  background-color: #e74c3c;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
   cursor: pointer;
+  border-radius: 8px;
 }
 
-/* Style the flash message */
-ul.flash-message {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+button:hover {
+  background-color: #3e8e41; /* Dark green */
 }
 
-ul.flash-message li {
-  color: #e74c3c;
-  font-weight: bold;
-  margin-bottom: 10px;
+button:active {
+  background-color: #4CAF50;
+  transform: translateY(4px);
 }
 
-/* Add hover effect to buttons */
-button:hover,
-a:hover {
-  opacity: 0.8;
-  cursor: pointer;
-  /* Add additional styles here */
+ul.my-10 li {
+  background-color: #f9fafb;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button.bg-red-500:hover,
-a.bg-red-500:hover {
-  background-color: #c53030;
-  /* Add additional styles here */
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  animation: fade-in 0.5s ease;
 }
+
+.message-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #e2e8f0;
+  color: #2d3748;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+}
+
+.message-text::before {
+  content: '\2713  ';
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+  color: #2d3748;
+  font-size: 1.2rem;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

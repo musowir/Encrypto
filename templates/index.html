@@ -4,77 +4,96 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
 
       <!-- Tailwind CSS -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
-      <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
-      <title>Encrypto</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">      <title>Encrypto</title>
    </head>
    <body class="bg-gray-100">
-    <header class="bg-blue-100 p-4">
+    <header class="bg-white p-4">
         <h1 class="text-3xl font-bold text-center text-blue-500 py-5">Encrypto</h1>
      </header>
       <div class="container mx-auto p-4">
+   
          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-white rounded-lg p-4 text-center">
+            <div class="bg-white rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
                <h1 class="text-xl font-bold mb-2">File Encryption</h1>
-               <form action="{{ url_for('encrypt_file') }}" method="post" enctype="multipart/form-data">
+               <form class="mt-auto" action="{{ url_for('encrypt_file') }}" method="post" enctype="multipart/form-data">
                   <div class="mb-4">
-                     <label for="file" class="block text-gray-700 font-bold mb-2">Select file to encrypt:</label>
+                     <label for="file" class="block text-gray-700 font-bold mb-2 text-left">Select file to encrypt:</label>
                      <input type="file" class="border rounded w-full py-2 px-3" name="file" required>
                   </div>
-                  <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 mx-auto rounded">Encrypt</button>
+                  <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 mx-auto rounded hover:bg-blue-700 transition-colors">Encrypt</button>
                </form>
             </div>
-            <div class="bg-white rounded-lg p-4">
+            <div class="bg-white rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
                <h1 class="text-xl font-bold mb-2">File Decryption</h1>
                <form action="{{ url_for('decrypt_file') }}" method="post" enctype="multipart/form-data">
                   <div class="mb-4">
-                     <label for="file" class="block text-gray-700 font-bold mb-2">Select file to decrypt:</label>
+                     <label for="file" class="block text-gray-700 font-bold mb-2 text-left">Select file to decrypt:</label>
                      <input type="file" class="border rounded w-full py-2 px-3" name="file" required>
                   </div>
                   <div class="mb-4">
-                     <label for="key" class="block text-gray-700 font-bold mb-2">Upload .key file:</label>
+                     <label for="key" class="block text-gray-700 font-bold mb-2 text-left">Upload .key file:</label>
                      <input type="file" class="border rounded w-full py-2 px-3" name="key">
                   </div>
-                  <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Decrypt</button>
+                  <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4  mx-auto mt-0 rounded hover:bg-blue-700 transition-colors">Decrypt</button>
                </form>
             </div>
          </div>
 
-         {% if encrypted_file %}
-    <hr class="my-8">
-    <h2 class="text-xl font-bold mb-2">Encrypted file</h2>
-    <a href="{{ url_for('download_file', filename=encrypted_file) }}" class="bg-green-500 text-white font-bold py-2 px-4 rounded mr-2">Download encrypted file</a>
-    {% if key_file %}
-       <a href="{{ url_for('download_file', filename=key_file) }}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Download key</a>
-    {% endif %}
-{% endif %}
-
-{% if decrypted_file %}
+         {% if decrypted_file %}
   <div class="my-10">
     <h2 class="text-3xl font-bold mb-5">Decrypted file</h2>
     <a href="{{ url_for('download_file', filename=decrypted_file) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download decrypted file</a>
   </div>
 {% endif %}
-
+<div class="my-10 text-center">
 <form method="GET" action="/clear" class="my-10">
   <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear Folders</button>
 </form>
-
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <ul class="my-10">
+    <ul class="my-10 message">
       {% for message in messages %}
-        <li class="text-red-500 font-bold">{{ message }}</li>
+        <li class="font-bold message-text">&nbsp;&nbsp;{{ message }}</li>
       {% endfor %}
     </ul>
   {% endif %}
 {% endwith %}
-
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
 
-</div></body></html>
+</div>
+<footer class=" p-4 mt-auto" style="background-color: rgba(61, 61, 61, 0.447);">
+   <div class="flex justify-between">
+     <div class="text-gray-700">
+       <p class="mb-2">&copy; 2023 Encrypto</p>
+       <p>Designed and Developed by <a href="https://github.com/musowir">Abdu Musowir U</a></p>
+     </div>
+     <div class="flex items-center">
+       <a href="https://github.com/musowir/Encrypto" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-brown-500">
+         <i class="bi bi-github"></i>
+       </a>
+       <a href="https://medium.com/@musowir_u/encrypto-the-ultimate-guide-to-building-a-secure-file-encryption-web-app-with-flask-and-python-f496ae9a58f6" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-white">
+         <i class="bi bi-medium"></i>
+       </a>
+       <a href="https://www.instagram.com/musowir_u/" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-red-500">
+         <i class="bi bi-instagram"></i>
+       </a>
+       <a href="https://www.linkedin.com/in/musowir-u" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-blue-700">
+         <i class="bi bi-linkedin"></i>
+       </a>
+       <a href="https://twitter.com/musowir_u" target="_blank" rel="noopener" class="text-gray-700 text-xl hover:text-blue-500">
+         <i class="bi bi-twitter"></i>
+       </a>
+     </div>
+   </div>
+ </footer>
+ 
+ 
+</body>
+</html>
