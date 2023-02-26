@@ -11,12 +11,23 @@
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">      <title>Encrypto</title>
    </head>
    <body class="bg-gray-100">
-    <header class="bg-white p-4">
-        <h1 class="text-3xl font-bold text-center text-blue-500 py-5">Encrypto</h1>
-     </header>
-      <div class="container mx-auto p-4">
+    <header class="bg-white p-8">
+  <nav class="flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-grey-500">Encrypto</h1>
+    <ul class="flex">
+      <li class="mr-6">
+        <a href="#fileencryp" class="font-bold" style="color: rgb(147, 149, 151);">File Encryption</a>
+      </li>
+      <li>
+        <a href="#textdecryp" class="font-bold" style="color: rgb(147, 149, 151);">Text Encryption</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+      <div class="container mx-auto p-4" id="fileencryp">
    
-         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4" >
             <div class="bg-white rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
                <h1 class="text-xl font-bold mb-2">File Encryption</h1>
                <form class="mt-auto" action="{{ url_for('encrypt_file') }}" method="post" enctype="multipart/form-data">
@@ -50,6 +61,90 @@
   </div>
 {% endif %}
 <div class="my-10 text-center">
+<form method="GET" action="/clear">
+  <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear Uploads</button>
+</form>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="my-10 message">
+      {% for message in messages %}
+        <li class="font-bold message-text">&nbsp;&nbsp;{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</div>
+</div>
+<hr class="border-t border-gray-400 my-8">
+
+<div class="container mx-auto p-4" id="textdecryp">
+   
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-white rounded-lg px-4 pt-4 pb-2 text-center hover:shadow-lg transition-shadow">
+            <h1 class="text-xl font-bold mb-2">Text Encryption</h1>
+            <form class="mt-auto" action="{{ url_for('text_encryption') }}" method="post" enctype="multipart/form-data">
+                {% if encrypted_text %}
+                <div class="mb-4">
+                    <label for="file" class="block text-gray-700 font-bold mb-2 text-left">Encrypted text:</label>
+                    <textarea rows=4 class="border rounded w-full py-2 px-3" readonly>{{ encrypted_text }}</textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="file" class="block text-gray-700 font-bold mb-2 text-left">Encryption key:</label>
+                    <input type="text" class="border rounded w-full py-2 px-3" readonly value="{{ key }}">
+                </div>
+                {% else %}
+                <div class="mb-4">
+                  <label for="file" class="block text-gray-700 font-bold mb-2 text-left">Enter text to encrypt:</label>
+                  <textarea rows=4 class="border rounded w-full py-2 px-3" name="en-text" required>{{ text }}</textarea>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 mx-auto rounded hover:bg-blue-700 transition-colors">Encrypt</button>
+              
+                {% endif %}
+               </form>
+              {% if encrypted_text %}
+              <form method="POST" action="/clear_flask_vars">
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear</button>
+              </form>
+              {% endif %}
+
+        </div>
+        
+            <div class="bg-white rounded-lg px-4 pt-4 pb-2 text-center hover:shadow-lg transition-shadow">
+               <h1 class="text-xl font-bold mb-2">Text Decryption</h1>
+               <form action="{{ url_for('decrypt_text') }}" method="post" enctype="multipart/form-data">
+                  
+                  {% if decrypted_text %}
+                <div class="mb-4">
+                    <label for="file" class="block text-gray-700 font-bold mb-2 text-left">Decrypted text:</label>
+                    <textarea rows=4 class="border rounded w-full py-2 px-3" readonly>{{ decrypted_text }}</textarea>
+                </div>
+                {% else %}
+                <div class="mb-4">
+                  <label for="file" class="block text-gray-700 font-bold mb-2 text-left">Enter text to decrypt:</label>
+                  <textarea rows="4" class="border rounded w-full py-2 px-3" name="en-text" required></textarea>
+               </div>
+               <div class="mb-4">
+                  <label for="key" class="block text-gray-700 font-bold mb-2 text-left">Enter your key:</label>
+                  <input type="text" class="border rounded w-full py-2 px-3" name="key">
+               </div>
+               <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4  mx-auto mt-0 rounded hover:bg-blue-700 transition-colors">Decrypt</button>
+                {% endif %}
+                 </form>
+                 {% if decrypted_text %}
+                  <form method="POST" action="/clear_flask_vars">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear</button>
+                  </form>
+                  {% endif %}
+            </div>
+         </div>
+
+         <!-- {% if decrypted_file %}
+  <div class="my-10">
+    <h2 class="text-3xl font-bold mb-5">Decrypted file</h2>
+    <a href="{{ url_for('download_file', filename=decrypted_file) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download decrypted file</a>
+  </div>
+{% endif %} -->
+<!-- <div class="my-10 text-center">
 <form method="GET" action="/clear" class="my-10">
   <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Clear Folders</button>
 </form>
@@ -62,12 +157,14 @@
     </ul>
   {% endif %}
 {% endwith %}
+</div> -->
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
 
-</div>
+
 <footer class=" p-4 mt-auto" style="background-color: rgba(61, 61, 61, 0.447);">
    <div class="flex justify-between">
      <div class="text-gray-700">

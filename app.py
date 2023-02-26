@@ -1,13 +1,14 @@
 import os
-from flask import Flask, request, render_template, flash,redirect, send_file, url_for
+from flask import Flask, request, render_template, flash,redirect, send_file, url_for, session
 from werkzeug.utils import secure_filename
 from cryptography.fernet import Fernet, InvalidToken
 from zipfile import ZipFile
 import shutil
+import secrets
+
 
 app = Flask(__name__, static_folder='static')
-
-app.config['SECRET_KEY'] = 'mysecretkey'
+app.secret_key = secrets.token_hex(16)
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'uploads')
 app.config['DOWNLOAD_FOLDER'] = os.path.join(app.root_path, 'downloads')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -28,7 +29,7 @@ def load_key(key_path):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', decrypted_text=None, encrypted_text=None)
 
 @app.route('/encrypt', methods=['POST'])
 def encrypt_file():
@@ -117,8 +118,37 @@ def decrypt_file():
     else:
         return render_template('decrypt.html')
     
+@app.route('/text-encryption', methods=['GET', 'POST'])
+def text_encryption():
+    if request.method == 'POST':
+        text = bytes(request.form.get('en-text'), 'utf-8')
+        # perform encryption on the text here and get the encrypted text and key
+        key = Fernet.generate_key()
+        f=Fernet(key)
+        encrypted_text = f.encrypt(text).decode()
+        key=key.decode()
+        return render_template('index.html', encrypted_text=encrypted_text, key=key, text=text)
+    return render_template('index.html')
+
+@app.route('/decrypt_text',  methods=['GET', 'POST'])
+def decrypt_text():
+    if request.method == 'POST':
+        text = bytes(request.form.get('en-text'), 'utf-8')
+        key = request.form.get('key')
+        # perform decryption
+        f=Fernet(key)
+        decrypted_text = f.decrypt(text).decode()
+        return render_template('index.html', decrypted_text=decrypted_text)
+    return render_template('index.html')
+
+@app.route('/clear_flask_vars', methods=['POST'])
+def clear_flask_vars():
+    session.clear()  # clear all session variables
+    return redirect(url_for('index', _anchor='textdecryp'))
+
 @app.route('/clear')
 def clear():
+    
     # Clear uploads folder
     for filename in os.listdir(app.config['UPLOAD_FOLDER']):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
