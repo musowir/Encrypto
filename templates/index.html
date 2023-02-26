@@ -11,15 +11,15 @@
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">      <title>Encrypto</title>
    </head>
    <body class="bg-gray-100">
-    <header class="bg-white p-8">
+    <header class="p-8">
   <nav class="flex justify-between items-center">
     <h1 class="text-3xl font-bold text-grey-500">Encrypto</h1>
     <ul class="flex">
       <li class="mr-6">
-        <a href="#fileencryp" class="font-bold" style="color: rgb(147, 149, 151);">File Encryption</a>
+        <a href="#fileencryp" class="font-bold" style="color: rgb(248, 248, 248);">File Encryption</a>
       </li>
       <li>
-        <a href="#textdecryp" class="font-bold" style="color: rgb(147, 149, 151);">Text Encryption</a>
+        <a href="#textdecryp" class="font-bold" style="color: rgb(244, 245, 246);">Text Encryption</a>
       </li>
     </ul>
   </nav>
@@ -27,8 +27,8 @@
 
       <div class="container mx-auto p-4" id="fileencryp">
    
-         <div class="grid grid-cols-1 md:grid-cols-2 gap-4" >
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="card rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
                <h1 class="text-xl font-bold mb-2">File Encryption</h1>
                <form class="mt-auto" action="{{ url_for('encrypt_file') }}" method="post" enctype="multipart/form-data">
                   <div class="mb-4">
@@ -38,7 +38,7 @@
                   <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 mx-auto rounded hover:bg-blue-700 transition-colors">Encrypt</button>
                </form>
             </div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
+            <div class="card rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
                <h1 class="text-xl font-bold mb-2">File Decryption</h1>
                <form action="{{ url_for('decrypt_file') }}" method="post" enctype="multipart/form-data">
                   <div class="mb-4">
@@ -80,7 +80,7 @@
 <div class="container mx-auto p-4" id="textdecryp">
    
          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-white rounded-lg px-4 pt-4 pb-2 text-center hover:shadow-lg transition-shadow">
+          <div class="card rounded-lg px-4 pt-4 pb-2 text-center hover:shadow-lg transition-shadow">
             <h1 class="text-xl font-bold mb-2">Text Encryption</h1>
             <form class="mt-auto" action="{{ url_for('text_encryption') }}" method="post" enctype="multipart/form-data">
                 {% if encrypted_text %}
@@ -109,7 +109,7 @@
 
         </div>
         
-            <div class="bg-white rounded-lg px-4 pt-4 pb-2 text-center hover:shadow-lg transition-shadow">
+            <div class="card rounded-lg px-4 pt-4 pb-2 text-center hover:shadow-lg transition-shadow">
                <h1 class="text-xl font-bold mb-2">Text Decryption</h1>
                <form action="{{ url_for('decrypt_text') }}" method="post" enctype="multipart/form-data">
                   
@@ -165,26 +165,26 @@
 <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
 
 
-<footer class=" p-4 mt-auto" style="background-color: rgba(61, 61, 61, 0.447);">
+<footer class=" p-4 mt-auto" style="background-color: rgba(36, 36, 88, 0.608);">
    <div class="flex justify-between">
-     <div class="text-gray-700">
+     <div class="text-white">
        <p class="mb-2">&copy; 2023 Encrypto</p>
        <p>Designed and Developed by <a href="https://github.com/musowir">Abdu Musowir U</a></p>
      </div>
      <div class="flex items-center">
-       <a href="https://github.com/musowir/Encrypto" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-brown-500">
+       <a href="https://github.com/musowir/Encrypto" target="_blank" rel="noopener" class="text-white mr-4 text-xl hover:text-grey">
          <i class="bi bi-github"></i>
        </a>
-       <a href="https://medium.com/@musowir_u/encrypto-the-ultimate-guide-to-building-a-secure-file-encryption-web-app-with-flask-and-python-f496ae9a58f6" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-white">
+       <a href="https://medium.com/@musowir_u/encrypto-the-ultimate-guide-to-building-a-secure-file-encryption-web-app-with-flask-and-python-f496ae9a58f6" target="_blank" rel="noopener" class="text-white mr-4 text-xl hover:text-black">
          <i class="bi bi-medium"></i>
        </a>
-       <a href="https://www.instagram.com/musowir_u/" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-red-500">
+       <a href="https://www.instagram.com/musowir_u/" target="_blank" rel="noopener" class="text-white mr-4 text-xl hover:text-red-500">
          <i class="bi bi-instagram"></i>
        </a>
-       <a href="https://www.linkedin.com/in/musowir-u" target="_blank" rel="noopener" class="text-gray-700 mr-4 text-xl hover:text-blue-700">
+       <a href="https://www.linkedin.com/in/musowir-u" target="_blank" rel="noopener" class="text-white mr-4 text-xl hover:text-blue-700">
          <i class="bi bi-linkedin"></i>
        </a>
-       <a href="https://twitter.com/musowir_u" target="_blank" rel="noopener" class="text-gray-700 text-xl hover:text-blue-500">
+       <a href="https://twitter.com/musowir_u" target="_blank" rel="noopener" class="text-white text-xl hover:text-blue-500">
          <i class="bi bi-twitter"></i>
        </a>
      </div>
