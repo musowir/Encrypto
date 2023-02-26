@@ -89,14 +89,6 @@ button { /* Green */
   border-radius: 8px;
 }
 
-button:hover {
-  background-color: #838383; /* Dark green */
-}
-
-button:active {
-  background-color: #af4c75;
-  transform: translateY(4px);
-}
 
 ul.my-10 li {
   background-color: #f9fafb;
