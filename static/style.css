@@ -1,9 +1,36 @@
 body {
   background-image: url('https://images.designtrends.com/wp-content/uploads/2016/04/04115311/Horizon-Sunset-Background.jpg');
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px); /* For Safari */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
 }
   
+.rotate-90 {
+  -webkit-animation: rotate-90 0.5s linear forwards;
+  animation: rotate-90 0.5s linear forwards;
+}
+
+@-webkit-keyframes rotate-90 {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes rotate-90 {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
   /* Style for the header */
   header {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -48,8 +75,7 @@ button {
 }
 
 /* Add animation and style to buttons */
-button {
-  background-color: #4CAF50; /* Green */
+button { /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -64,11 +90,11 @@ button {
 }
 
 button:hover {
-  background-color: #3e8e41; /* Dark green */
+  background-color: #838383; /* Dark green */
 }
 
 button:active {
-  background-color: #4CAF50;
+  background-color: #af4c75;
   transform: translateY(4px);
 }
 

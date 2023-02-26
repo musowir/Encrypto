@@ -12,21 +12,80 @@
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">      <title>Encrypto</title>
    </head>
    <body class="bg-gray-100">
-    <header class="py-8 px-3">
-  <nav class="flex justify-between items-center">
-    <h1 class="text-3xl font-bold text-grey-500">Encrypto</h1>
-    <ul class="flex">
-      <li class="mr-3">
-        <a href="#fileencryp" class="font-bold" style="color: rgb(248, 248, 248);">File Encryption</a>
-      </li>
-      <li>
-        <a href="#textdecryp" class="font-bold" style="color: rgb(244, 245, 246);">Text Encryption</a>
-      </li>
-    </ul>
-  </nav>
-</header>
+    <header class="py-4 px-3 md:py-8 md:px-3">
+      <nav class="flex justify-between items-center">
+        <h1 class="text-2xl md:text-3xl font-bold text-grey-500">Encrypto</h1>
+        <button id="menu-toggle" class="md:hidden focus:outline-none p-2">
+          <i class="bi bi-list font-bold text-2xl"></i>
+        </button>
+        <ul id="nav-links" class="md:flex md:flex-row md:items-center hidden mt-4 md:mt-0">
+          <li class="mr-3">
+            <a href="#fileencryp" class=" text-white hover:text-gray-700">File Encryption</a>
+          </li>
+          <li class="mr-3">
+            <a href="#textdecryp" class="text-white hover:text-gray-700">Text Encryption</a>
+          </li>
+          <li>
+            <a href="#" class="text-white hover:text-gray-700">Password Generator (coming soon)</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    
+    <script>
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinks = document.getElementById('nav-links');
+    
+      menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('hidden');
+        menuToggle.classList.toggle('rotate-90');
+        const isOpen = !navLinks.classList.contains('hidden');
+        const openMenuPath = 'M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z';
+        const closedMenuPath = 'M4 8h16M4 16h16';
+        const openMenuClass = 'menu-open';
+        const closedMenuClass = 'menu-closed';
+    
+        // Toggle the icon to show/hide the menu
+        const menuIcon = menuToggle.querySelector('svg');
+        menuIcon.querySelector(`.${openMenuClass}`).classList.toggle('hidden', isOpen);
+        menuIcon.querySelector(`.${closedMenuClass}`).classList.toggle('hidden', !isOpen);
+        menuIcon.setAttribute('viewBox', isOpen ? '0 0 24 24' : '0 0 20 20');
+        menuIcon.setAttribute('width', isOpen ? '24' : '20');
+        menuIcon.setAttribute('height', isOpen ? '24' : '20');
+        menuIcon.querySelector('path').setAttribute('d', isOpen ? openMenuPath : closedMenuPath);
+      });
+    </script>
+    
 
-      <div class="container mx-auto p-4" id="fileencryp">
+  <div class="px-10 py-8 text-white" id="fileencryp">
+  <h2 class="text-xl font-bold mb-2">File Encrytion - How to</h2>
+  <hr class="my-4 border-gray-300 border-1">
+  <p class="text-gray-700">
+  <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+    <div class="mb-4 mx-4">
+      <dt class="font-bold">Encryption:</dt>
+      <dd>
+        <ul class="list-disc list-inside">
+          <li>Upload your file (txt, docx, pdf, jpg or png)</li>
+          <li>Click on "Encrypt" to download a zip file containing the encrypted document and a key</li>
+        </ul>
+      </dd>
+    </div>
+    <div class="mb-4 mx-4">
+      <dt class="font-bold">Decryption:</dt>
+      <dd>
+        <ul class="list-disc list-inside">
+          <li>Upload the encrypted file and key separately.</li>
+          <li>Click on "Decrypt" button to get the decrypted form.</li>
+        </ul>
+      </dd>
+    </div>
+  </dl>
+</p>
+
+</div>
+
+      <div class="container mx-auto p-4">
    
          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="card rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
@@ -76,9 +135,36 @@
 {% endwith %}
 </div>
 </div>
-<hr class="border-t border-gray-400 my-8">
 
-<div class="container mx-auto p-4" id="textdecryp">
+<div class="px-10 py-8 text-white" id="textdecryp">
+  <h2 class="text-xl font-bold mb-2">Text Encrytion - How to</h2>
+  <hr class="my-4 border-gray-300 border-1">
+  <p class="text-gray-700">
+  <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+    <div class="mb-4 mx-4">
+      <dt class="font-bold">Encryption:</dt>
+      <dd>
+        <ul class="list-disc list-inside">
+          <li>Type the text you want to encrypt.</li>
+          <li>Click on "Encrypt" to get the encryped text along with the key. this unique key can later be used for decryption</li>
+        </ul>
+      </dd>
+    </div>
+    <div class="mb-4 mx-4">
+      <dt class="font-bold">Decryption:</dt>
+      <dd>
+        <ul class="list-disc list-inside">
+          <li>Type the encryped text and corresponding key in the text boxs given.</li>
+          <li>Click on "Decrypt" button to get the decrypted text.</li>
+        </ul>
+      </dd>
+    </div>
+  </dl>
+</p>
+
+</div>
+
+<div class="container mx-auto p-4" >
    
          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="card rounded-lg px-4 pt-4 pb-2 text-center hover:shadow-lg transition-shadow">
