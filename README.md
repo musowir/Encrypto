@@ -7,7 +7,8 @@ The /decrypt route allows users to upload an encrypted file and its correspondin
 
 The app also includes a /clear route that allows users to clear the server's uploads and downloads folders.
 
-
+## Update:
+Added two more routes for text encryption and decryption
 
 
 ## Getting Started
