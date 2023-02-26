@@ -136,8 +136,11 @@ def decrypt_text():
         text = bytes(request.form.get('en-text'), 'utf-8')
         key = request.form.get('key')
         # perform decryption
-        f=Fernet(key)
-        decrypted_text = f.decrypt(text).decode()
+        try:
+            f=Fernet(key)
+            decrypted_text = f.decrypt(text).decode()
+        except:
+            decrypted_text = "Incorrect Input: check your text and key!!"
         return render_template('index.html', decrypted_text=decrypted_text)
     return render_template('index.html')
 
